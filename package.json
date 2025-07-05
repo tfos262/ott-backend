@@ -1,0 +1,31 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test JWT_SECRET=super_secret_test_key mocha --require test/mochaSetup.js 'test/**/*.test.js'",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mocha": "^11.7.1",
+    "mysql2": "^3.14.1",
+    "nodemon": "^3.1.10",
+    "square": "^43.0.0",
+    "supertest": "^7.1.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "jest": "^30.0.3"
+  }
+}
