@@ -13,7 +13,7 @@ const app = express();
 // const JWT_SECRET = process.env.JWT_SECRET;
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: process.env.CLIENT_ORIGIN || 'http://localhost:3000',
     credentials: true,
 }));
 
@@ -37,8 +37,10 @@ async function startServer() {
 
         app.locals.db = db;
 
-        app.listen(8080, () => {
-            console.log('Server is running on port 8080');
+        const PORT = process.env.PORT || 8080;
+
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
         });
     } catch (error) {
         console.error('Database connection failed:', error);
