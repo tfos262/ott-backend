@@ -5,7 +5,7 @@ import authRoutes from './routes/auth.js';
 import paymentRoutes from './routes/payments.js';
 import teeTimeRoutes from './routes/teetimes.js';
 import customerRoutes from './routes/customers.js';
-import mysql from 'mysql2/promise';
+import { createDbConnection } from './config/db.js';
 
 dotenv.config();
 
@@ -26,30 +26,24 @@ app.use('/api', customerRoutes());
 
 let db;
 
-// async function startServer() {
-//     try {
-//         db = await mysql.createConnection({
-//             host: process.env.DB_HOST,
-//             user: process.env.DB_USER,
-//             password: process.env.DB_PASSWORD,
-//             database: process.env.DB_NAME
-//         });
+async function startServer() {
+    try {
+        const db = await createDbConnection();
+        app.locals.db = db;
 
-//         app.locals.db = db;
+        const PORT = process.env.PORT || 8080;
 
-//         const PORT = process.env.PORT || 8080;
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+        });
+    } catch (error) {
+        console.error('Database connection failed:', error.message);
+        console.error(error); // This shows sqlState or code
+        process.exit(1);
+    }
+}
 
-//         app.listen(PORT, () => {
-//             console.log(`Server is running on port ${PORT}`);
-//         });
-//     } catch (error) {
-//         console.error('Database connection failed:', error.message);
-//         console.error(error); // This shows sqlState or code
-//         process.exit(1);
-//     }
-// }
-
-// startServer();
+startServer();
 
 app.get("/", async (req, res) => {
     return res.json({ message: "Server is running" });
