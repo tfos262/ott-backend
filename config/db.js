@@ -1,10 +1,12 @@
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
+import fs from 'fs';
+
 dotenv.config();
 // // Azure MySQL connection example
 
-var fs = require('fs');
-var mysql = require('mysql');
+// var fs = require('fs');
+// var mysql = require('mysql');
 const serverCa = [fs.readFileSync("/var/www/html/DigiCertGlobalRootCA.crt.pem", "utf8")];
 var conn=mysql.createConnection({
     host:process.env.DB_HOST,

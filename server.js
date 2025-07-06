@@ -43,7 +43,8 @@ async function startServer() {
             console.log(`Server is running on port ${PORT}`);
         });
     } catch (error) {
-        console.error('Database connection failed:', error);
+        console.error('Database connection failed:', error.message);
+        console.error(error); // This shows sqlState or code
         process.exit(1);
     }
 }
