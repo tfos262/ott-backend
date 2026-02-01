@@ -28,7 +28,7 @@ let db;
 
 async function startServer() {
     try {
-        const db = await createDbConnection();
+        const db = createDbConnection();
         app.locals.db = db;
 
         const PORT = process.env.PORT || 8080;
